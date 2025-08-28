@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sana Ejaz — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:rgba(255,255,255,0.08);
+      --border:rgba(255,255,255,0.15);
+      --text:#eef3fb;
+      --muted:#a8b2c8;
+      --accent1:#ff00cc;
+      --accent2:#00f0ff;
+      --radius:20px;
+    }
+    body.light{
+      --bg:#f9f9fb;
+      --card:#ffffff;
+      --border:#e2e6ef;
+      --text:#111;
+      --muted:#555;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition:all .4s ease;
+      padding-top:70px;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    /* Aurora background */
+    body::before{
+      content:"";position:fixed;inset:0;
+      background:linear-gradient(120deg,#ff00cc,#3333ff,#00f0ff);
+      background-size:600% 600%;
+      animation:aurora 20s ease infinite;
+      z-index:-2;filter:blur(140px) opacity(.45);
+    }
+    @keyframes aurora{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* Stars */
+    #particles .star{
+      position:absolute;width:3px;height:3px;background:white;
+      border-radius:50%;opacity:0.7;animation:twinkle linear infinite;
+    }
+    @keyframes twinkle{
+      from{transform:translateY(0);opacity:1}
+      to{transform:translateY(100vh);opacity:0}
+    }
+
+    /* Navbar */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:var(--card);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 24px;
+    }
+    nav .logo{font-weight:700;font-size:18px;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav ul{list-style:none;display:flex;gap:20px}
+    nav ul li a{text-decoration:none;color:var(--text);font-size:14px;font-weight:500;transition:.3s}
+    nav ul li a:hover{color:var(--accent2)}
+    .toggle{cursor:pointer;padding:6px 12px;border-radius:999px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;font-size:13px;font-weight:600}
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer}
+    .hamburger div{width:22px;height:3px;background:var(--text);border-radius:4px}
+    .mobile-menu{display:none;flex-direction:column;gap:12px;background:var(--card);padding:12px;position:absolute;top:56px;right:24px;border-radius:var(--radius);border:1px solid var(--border)}
+    .mobile-menu a{color:var(--text);text-decoration:none;font-size:14px}
+    .mobile-menu.show{display:flex}
+    #progress{position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent1),var(--accent2));width:0}
+
+    /* Container */
+    .container{max-width:1200px;margin:auto;padding:24px;display:grid;grid-template-columns:2fr 1fr;gap:24px}
+    .left,.right{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;opacity:0;transform:translateY(30px);transition:all .8s ease;margin-bottom:24px}
+    .show{opacity:1;transform:translateY(0)}
+    h1,h2{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    h1{font-size:36px;font-weight:700}
+    h2{font-size:22px;margin:20px 0 12px;font-weight:600;position:relative}
+    h2::after{content:"";position:absolute;left:0;bottom:-4px;width:60px;height:3px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:3px}
+    .subtitle{color:var(--muted);font-size:16px;margin-top:6px}
+    .summary{margin-top:18px;display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.5}
+    .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+    .tag{padding:8px 14px;background:linear-gradient(135deg,rgba(124,58,237,0.25),rgba(6,182,212,0.25));border-radius:999px;font-size:13px;font-weight:500;transition:.3s}
+    .tag:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(6,182,212,0.3)}
+
+    .projects,.certificates{display:grid;gap:12px}
+    .project,.cert{
+      padding:14px 18px;border-radius:14px;
+      border:2px solid transparent;
+      background:linear-gradient(var(--card),var(--card)) padding-box,
+                 linear-gradient(45deg,var(--accent1),var(--accent2)) border-box;
+      display:flex;justify-content:space-between;align-items:center;
+      font-weight:500;cursor:pointer;transition:.3s
+    }
+    .project:hover,.cert:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 0 25px rgba(0,255,255,.4)}
+
+    .links{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap}
+    .btn{cursor:pointer;text-decoration:none;padding:10px 18px;border-radius:14px;font-weight:600;font-size:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;transition:all .3s ease;box-shadow:0 4px 14px rgba(124,58,237,0.3)}
+    .btn:hover{transform:translateY(-3px) scale(1.08);box-shadow:0 8px 28px rgba(6,182,212,0.5)}
+
+    .profile{display:flex;align-items:center;gap:14px}
+    .avatar{width:70px;height:70px;border-radius:16px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:white}
+    .meta .role{color:var(--muted);font-size:14px;margin-top:4px}
+    .meta .loc{color:var(--muted);font-size:13px;margin-top:4px}
+    .info{margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:14px}
+    .info div{display:flex;justify-content:space-between;color:var(--muted)}
+    .skills{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+    .skill{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);font-size:13px}
+    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:12px}
+
+    /* Email Modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:2000}
+    .modal-content{background:var(--card);padding:24px;border-radius:var(--radius);width:90%;max-width:420px}
+    .modal-content h2{margin-bottom:10px}
+    .modal-content textarea{width:100%;height:120px;margin-top:10px;padding:8px;border-radius:8px;border:1px solid var(--border)}
+    .modal-content button{margin-top:12px;padding:10px 14px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;font-weight:600;cursor:pointer}
+    .close{float:right;cursor:pointer;font-size:20px}
+
+    /* Project Modal */
+    .project-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:2000}
+    .project-modal .content{background:var(--card);border-radius:var(--radius);padding:24px;max-width:600px;width:90%;border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+    .project-modal h3{margin-bottom:10px}
+    .project-modal p{font-size:14px;color:var(--muted);line-height:1.5}
+    .project-modal .close{float:right;cursor:pointer;font-size:22px;color:var(--accent2);font-weight:700}
+
+    @media(max-width:900px){
+      .container{grid-template-columns:1fr}
+      nav ul{display:none}
+      .hamburger{display:flex}
+    }
+  </style>
+</head>
+<body>
+  <div id="particles"></div>
+  <nav>
+    <div class="logo">Sana Ejaz</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certs">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="toggle" onclick="toggleTheme()">Toggle 🌙</div>
+      <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" onclick="toggleMenu()">About</a>
+      <a href="#projects" onclick="toggleMenu()">Projects</a>
+      <a href="#certs" onclick="toggleMenu()">Certificates</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+    <div id="progress"></div>
+  </nav>
+
+  <main class="container">
+    <!-- About -->
+    <section class="left" id="about">
+      <h1>About Me</h1>
+      <div class="subtitle">Frontend Developer • UI/UX Designer • Machine Learning Enthusiast</div>
+      <div class="summary">
+        <p>IT student & UI/UX Designer with strong skills in Frontend Development and Machine Learning.</p>
+        <p>Skilled in HTML, CSS, JavaScript, Figma, and Adobe XD for responsive interfaces.</p>
+        <p>Projects: Cookly App, Auth API Integration, Loan Approval ML Model, and more.</p>
+        <p>Certified in Project Management, Cloud Computing, AI Mastery, and UI/UX Design.</p>
+        <p>Passionate about crafting seamless digital experiences and learning new technologies.</p>
+      </div>
+      <div class="tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Figma</span><span class="tag">Machine Learning</span>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="left" id="projects">
+      <h2>Projects</h2>
+      <h3>UI/UX</h3>
+      <div class="projects">
+        <div class="project" onclick="openProject('Cookly Landing Page','A landing page UI/UX case study for Cookly app.')"><span>Cookly Landing Page</span><span>UI/UX</span></div>
+        <div class="project" onclick="openProject('Cookly App','Full mobile app UI/UX design for recipe and cooking community.')"><span>Cookly App</span><span>UI/UX</span></div>
+        <div class="project" onclick="openProject('Shiprocket App','E-commerce shipping & logistics UI/UX redesign.')"><span>Shiprocket App</span><span>UI/UX</span></div>
+        <div class="project" onclick="openProject('Connectly App','Messaging platform concept with modern UI/UX.')"><span>Connectly App</span><span>UI/UX</span></div>
+        <div class="project" onclick="openProject('Univenue Case Study','Case study for event management app interface.')"><span>Univenue Case Study</span><span>UI/UX</span></div>
+        <div class="project" onclick="openProject('Nuroai App','AI assistant app UI/UX prototype.')"><span>Nuroai App</span><span>UI/UX</span></div>
+      </div>
+      <h3>Machine Learning</h3>
+      <div class="projects">
+        <div class="project" onclick="openProject('Forest Classification','ML model to classify forest types.')"><span>Forest Classification</span><span>ML</span></div>
+        <div class="project" onclick="openProject('Loan Approval','ML system for loan approval predictions.')"><span>Loan Approval</span><span>ML</span></div>
+        <div class="project" onclick="openProject('Customer Segmentation','Clustering analysis for business customers.')"><span>Customer Segmentation</span><span>ML</span></div>
+        <div class="project" onclick="openProject('Student Score Prediction','Regression model for predicting student scores.')"><span>Student Score Prediction</span><span>ML</span></div>
+        <div class="project" onclick="openProject('GL App','Experimental ML-driven app.')"><span>GL App</span><span>ML</span></div>
+      </div>
+      <h3>Frontend</h3>
+      <div class="projects">
+        <div class="project" onclick="openProject('Static Authentication WebApp','Frontend-only authentication demo site.')"><span>Static Authentication WebApp</span><span>Frontend</span></div>
+        <div class="project" onclick="openProject('Auth API Integration','Frontend with API-based authentication system.')"><span>Auth API Integration</span><span>Frontend</span></div>
+      </div>
+    </section>
+
+    <!-- Certificates -->
+    <section class="left" id="certs">
+      <h2>Certificates</h2>
+      <div class="certificates">
+        <div class="cert">UI/UX Designer <span>Developershub</span></div>
+        <div class="cert">Project Management <span>Certified</span></div>
+        <div class="cert">Cloud Computing <span>Certified</span></div>
+        <div class="cert">IT Support <span>Certified</span></div>
+        <div class="cert">HRM <span>Certified</span></div>
+        <div class="cert">Effective Leadership <span>Certified</span></div>
+        <div class="cert">AI Mastery <span>Certified</span></div>
+        <div class="cert">Marketing Manager <span>Certified</span></div>
+        <div class="cert">Executive Virtual Assistant <span>Certified</span></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <aside class="right" id="contact">
+      <div class="profile">
+        <div class="avatar">SE</div>
+        <div class="meta">
+          <div style="font-weight:600">Sana Ejaz</div>
+          <div class="role">BS IT (2021–2025)</div>
+          <div class="loc">Chakwal, Pakistan</div>
+        </div>
+      </div>
+      <div class="info">
+        <div><span>Languages</span><span>English, French, Urdu</span></div>
+        <div><span>Contact</span><span>sanaejaz2708@gmail.com</span></div>
+      </div>
+      <div class="skills">
+        <div class="skill">HTML/CSS</div><div class="skill">JavaScript</div><div class="skill">Figma</div><div class="skill">Adobe XD</div><div class="skill">Machine Learning</div><div class="skill">SQL</div>
+      </div>
+      <div class="links">
+        <a class="btn" href="https://drive.google.com/file/d/1Fnld7YN3QwzFzvlvfpb569xhASBTwxkb/view?usp=sharing" target="_blank">📄 View CV</a>
+        <a class="btn" href="https://drive.google.com/uc?export=download&id=1Fnld7YN3QwzFzvlvfpb569xhASBTwxkb">⬇️ Download CV</a>
+        <button class="btn" onclick="openModal()">✉️ Email Me</button>
+        <a class="btn" href="https://github.com/San999-dev" target="_blank">GitHub</a>
+        <a class="btn" href="https://www.behance.net/sanaejaz10" target="_blank">Behance</a>
+        <a class="btn" href="https://www.linkedin.com/in/sana-ejaz-18a170268" target="_blank">LinkedIn</a>
+      </div>
+      <footer>Portfolio • Updated Aug 2025</footer>
+    </aside>
+  </main>
+
+  <!-- Email Modal -->
+  <div class="modal" id="emailModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Send a Message</h2>
+      <input type="text" id="subject" placeholder="Subject" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border)">
+      <textarea id="message" placeholder="Type your message..."></textarea>
+      <button onclick="sendEmail()">Send</button>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div class="project-modal" id="projectModal">
+    <div class="content">
+      <span class="close" onclick="closeProject()">&times;</span>
+      <h3 id="projTitle"></h3>
+      <p id="projDesc"></p>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme(){document.body.classList.toggle("light")}
+    function openModal(){document.getElementById("emailModal").style.display="flex"}
+    function closeModal(){document.getElementById("emailModal").style.display="none"}
+    function sendEmail(){
+      let subject=document.getElementById("subject").value;
+      let body=document.getElementById("message").value;
+      window.location.href=`mailto:sanaejaz2708@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      closeModal();
+    }
+    function openProject(title,desc){
+      document.getElementById("projTitle").innerText=title;
+      document.getElementById("projDesc").innerText=desc;
+      document.getElementById("projectModal").style.display="flex";
+    }
+    function closeProject(){document.getElementById("projectModal").style.display="none"}
+    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show")}})},{threshold:.2});
+    document.querySelectorAll(".left,.right").forEach(el=>observer.observe(el));
+    function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("show")}
+    window.addEventListener("scroll",()=>{let winScroll=document.body.scrollTop||document.documentElement.scrollTop;let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;let scrolled=(winScroll/height)*100;document.getElementById("progress").style.width=scrolled+"%"});
+    let particleContainer=document.getElementById("particles");
+    for(let i=0;i<60;i++){let star=document.createElement("div");star.className="star";star.style.left=Math.random()*100+"vw";star.style.animationDuration=(8+Math.random()*12)+"s";star.style.animationDelay=(Math.random()*5)+"s";particleContainer.appendChild(star);}
+  </script>
+</body>
+</html>
