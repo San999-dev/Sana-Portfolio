@@ -138,6 +138,22 @@
       color:#fff;font-weight:600;cursor:pointer;
     }
 
+    /* Popup */
+    #formPopup{
+      display:none;
+      position:fixed;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:linear-gradient(135deg,#00ff88,#00ccff);
+      color:#000;
+      padding:12px 24px;
+      border-radius:12px;
+      font-weight:600;
+      box-shadow:0 6px 20px rgba(0,0,0,0.2);
+      z-index:4000;
+    }
+
     /* Project Modal */
     .project-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:3000}
     .project-modal .content{background:var(--card);border-radius:16px;padding:20px;max-width:700px;width:92%;border:1px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
@@ -294,12 +310,15 @@
       </div>
 
       <!-- Contact Form -->
-      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="contact-form" id="contactForm">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="_replyto" placeholder="Your Email" required>
         <textarea name="message" rows="4" placeholder="Your Message..." required></textarea>
         <button type="submit">Send Message</button>
       </form>
+
+      <!-- Popup Message -->
+      <div id="formPopup">Thank you for your message!</div>
 
       <footer>Portfolio • Updated Aug 2025</footer>
     </aside>
@@ -338,7 +357,7 @@
     function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('show'); }
 
     // Scroll progress bar
-    window.addEventListener('scroll', ()=>{
+    window.addEventListener('scroll', ()=>{ 
       const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
@@ -362,8 +381,17 @@
 
     // Close modal on ESC/click
     window.addEventListener('keydown', e => { if(e.key === 'Escape') closeProject(); });
-    window.addEventListener('click', e => {
-      if(e.target === document.getElementById('projectModal')) closeProject();
+    window.addEventListener('click', e => { if(e.target === document.getElementById('projectModal')) closeProject(); });
+
+    // Contact Form Submission
+    const form = document.getElementById('contactForm');
+    const popup = document.getElementById('formPopup');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault(); // prevent form submission
+      popup.style.display = 'block'; // show popup
+      form.reset(); // reset fields
+      setTimeout(() => { popup.style.display = 'none'; }, 3000); // hide after 3s
     });
   </script>
 </body>
