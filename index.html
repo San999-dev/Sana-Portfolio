@@ -50,8 +50,8 @@
 
     /* Stars */
     #particles .star{
-      position:absolute;width:3px;height:3px;background:white;
-      border-radius:50%;opacity:0.7;animation:twinkle linear infinite;
+      position:absolute;width:3px;height:3px;background:white;border-radius:50%;
+      opacity:0.7;animation:twinkle linear infinite;
     }
     @keyframes twinkle{
       from{transform:translateY(0);opacity:1}
@@ -92,10 +92,26 @@
     .tag{padding:8px 14px;background:linear-gradient(135deg,rgba(124,58,237,0.25),rgba(6,182,212,0.25));border-radius:999px;font-size:13px;font-weight:500;transition:.3s}
     .tag:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(6,182,212,0.3)}
 
+    /* Services */
+    .services{display:grid;gap:16px}
+    .service{
+      padding:16px;border-radius:14px;
+      background:linear-gradient(var(--card),var(--card)) padding-box,
+                 linear-gradient(45deg,var(--accent1),var(--accent2)) border-box;
+      border:2px solid transparent;transition:.3s;
+    }
+    .service h3{
+      margin-bottom:6px;font-size:18px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .service p{font-size:14px;color:var(--muted);line-height:1.5}
+    .service:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 0 25px rgba(0,255,255,.4)}
+
+    /* Projects & Certificates */
     .projects,.certificates{display:grid;gap:12px}
     .project,.cert{
-      padding:14px 18px;border-radius:14px;
-      border:2px solid transparent;
+      padding:14px 18px;border-radius:14px;border:2px solid transparent;
       background:linear-gradient(var(--card),var(--card)) padding-box,
                  linear-gradient(45deg,var(--accent1),var(--accent2)) border-box;
       display:flex;justify-content:space-between;align-items:center;
@@ -145,6 +161,7 @@
     <div class="logo">Sana Ejaz</div>
     <ul>
       <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#certs">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -155,6 +172,7 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="#about" onclick="toggleMenu()">About</a>
+      <a href="#services" onclick="toggleMenu()">Services</a>
       <a href="#projects" onclick="toggleMenu()">Projects</a>
       <a href="#certs" onclick="toggleMenu()">Certificates</a>
       <a href="#contact" onclick="toggleMenu()">Contact</a>
@@ -176,6 +194,29 @@
       </div>
       <div class="tags">
         <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Figma</span><span class="tag">Machine Learning</span>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="left" id="services">
+      <h2>Services</h2>
+      <div class="services">
+        <div class="service">
+          <h3>🎨 UI/UX Design</h3>
+          <p>Wireframes, interactive prototypes, and design systems using <b>Figma</b> & <b>Adobe XD</b>. I focus on accessibility, clarity, and delightful micro-interactions.</p>
+        </div>
+        <div class="service">
+          <h3>💻 Frontend Development</h3>
+          <p>Responsive websites with <b>HTML, CSS, JavaScript</b>, clean components, API integrations, and performance best practices.</p>
+        </div>
+        <div class="service">
+          <h3>🧊 3D & Motion</h3>
+          <p>Subtle 3D UI moments and animations (e.g., <b>WebGL/Three.js</b>-style effects, smooth transitions, parallax) that elevate product feel without hurting performance.</p>
+        </div>
+        <div class="service">
+          <h3>🤖 Machine Learning</h3>
+          <p>Predictive models for classification/regression and clustering with <b>Python</b>, <b>scikit-learn</b>, and <b>Pandas</b> — from data prep to insights.</p>
+        </div>
       </div>
     </section>
 
@@ -273,11 +314,11 @@
 
   <script>
     function toggleTheme(){document.body.classList.toggle("light")}
-    function openModal(){document.getElementById("emailModal").style.display="flex"}
-    function closeModal(){document.getElementById("emailModal").style.display="none"}
+    function openModal(){document.getElementById("emailModal").style.display="flex")}
+    function closeModal(){document.getElementById("emailModal").style.display="none")}
     function sendEmail(){
-      let subject=document.getElementById("subject").value;
-      let body=document.getElementById("message").value;
+      const subject=document.getElementById("subject").value.trim();
+      const body=document.getElementById("message").value.trim();
       window.location.href=`mailto:sanaejaz2708@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       closeModal();
     }
@@ -287,12 +328,27 @@
       document.getElementById("projectModal").style.display="flex";
     }
     function closeProject(){document.getElementById("projectModal").style.display="none"}
-    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show")}})},{threshold:.2});
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show")}})
+    },{threshold:.2});
     document.querySelectorAll(".left,.right").forEach(el=>observer.observe(el));
     function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("show")}
-    window.addEventListener("scroll",()=>{let winScroll=document.body.scrollTop||document.documentElement.scrollTop;let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;let scrolled=(winScroll/height)*100;document.getElementById("progress").style.width=scrolled+"%"});
+    window.addEventListener("scroll",()=>{
+      const winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+      const height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+      const scrolled=(winScroll/height)*100;
+      document.getElementById("progress").style.width=scrolled+"%";
+    });
+    // Stars
     let particleContainer=document.getElementById("particles");
-    for(let i=0;i<60;i++){let star=document.createElement("div");star.className="star";star.style.left=Math.random()*100+"vw";star.style.animationDuration=(8+Math.random()*12)+"s";star.style.animationDelay=(Math.random()*5)+"s";particleContainer.appendChild(star);}
+    for(let i=0;i<60;i++){
+      let star=document.createElement("div");
+      star.className="star";
+      star.style.left=Math.random()*100+"vw";
+      star.style.animationDuration=(8+Math.random()*12)+"s";
+      star.style.animationDelay=(Math.random()*5)+"s";
+      particleContainer.appendChild(star);
+    }
   </script>
 </body>
 </html>
