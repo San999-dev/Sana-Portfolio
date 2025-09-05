@@ -14,7 +14,7 @@
       --muted:#a8b2c8;
       --accent1:#ff00cc;
       --accent2:#00f0ff;
-      --radius:18px;
+      --radius:16px;
     }
     body.light{
       --bg:#f9f9fb;
@@ -48,16 +48,6 @@
       100%{background-position:0% 50%}
     }
 
-    /* Stars */
-    #particles .star{
-      position:absolute;width:3px;height:3px;background:white;border-radius:50%;
-      opacity:0.7;animation:twinkle linear infinite;
-    }
-    @keyframes twinkle{
-      from{transform:translateY(0);opacity:1}
-      to{transform:translateY(100vh);opacity:0}
-    }
-
     /* Navbar */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:1000;
@@ -83,7 +73,7 @@
     .left,.right{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;opacity:0;transform:translateY(30px);transition:all .65s ease;margin-bottom:24px;box-shadow:0 8px 30px rgba(0,0,0,0.25)}
     .show{opacity:1;transform:translateY(0)}
     h1,h2{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    h1{font-size:36px;font-weight:700}
+    h1{font-size:34px;font-weight:700}
     h2{font-size:20px;margin:14px 0 12px;font-weight:600;position:relative}
     h2::after{content:"";position:absolute;left:0;bottom:-6px;width:60px;height:3px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:3px}
     .subtitle{color:var(--muted);font-size:15px;margin-top:6px}
@@ -92,34 +82,25 @@
     .tag{padding:8px 12px;background:linear-gradient(135deg,rgba(255,0,204,0.12),rgba(0,240,255,0.12));border-radius:999px;font-size:13px;font-weight:500;transition:.25s}
     .tag:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,240,255,0.08)}
 
-    /* Services */
-    .services{display:grid;gap:16px}
-    .service{
-      padding:16px;border-radius:14px;
+    /* Grid Cards */
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+    .card{
+      padding:16px;border-radius:14px;cursor:pointer;
       background:linear-gradient(var(--card),var(--card)) padding-box,
                  linear-gradient(45deg,var(--accent1),var(--accent2)) border-box;
       border:2px solid transparent;transition:.28s;
+      display:flex;flex-direction:column;gap:8px;align-items:flex-start;
     }
-    .service h3{margin-bottom:8px;font-size:17px}
-    .service p{font-size:14px;color:var(--muted);line-height:1.5}
-    .service:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 14px 40px rgba(0,255,255,0.06)}
-
-    /* Projects & Certificates */
-    .projects,.certificates{display:grid;gap:12px}
-    .project,.cert{
-      padding:14px 18px;border-radius:14px;border:2px solid transparent;
-      background:linear-gradient(var(--card),var(--card)) padding-box,
-                 linear-gradient(45deg,var(--accent1),var(--accent2)) border-box;
-      display:flex;justify-content:space-between;align-items:center;font-weight:500;cursor:pointer;transition:.25s;
-    }
-    .project:hover,.cert:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 12px 40px rgba(0,0,0,0.25)}
+    .card h3{font-size:16px;font-weight:600}
+    .card span{font-size:13px;color:var(--muted)}
+    .card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 14px 40px rgba(0,255,255,0.06)}
 
     .links{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
-    .btn{cursor:pointer;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:600;font-size:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;transition:all .25s ease;box-shadow:0 6px 20px rgba(124,58,237,0.18)}
-    .btn:hover{transform:translateY(-4px)}
+    .btn{cursor:pointer;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;font-size:13px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;transition:all .25s ease;box-shadow:0 6px 20px rgba(124,58,237,0.18)}
+    .btn:hover{transform:translateY(-3px)}
 
     .profile{display:flex;align-items:center;gap:12px}
-    .avatar{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:white}
+    .avatar img{width:64px;height:64px;border-radius:14px;object-fit:cover}
     .meta .role{color:var(--muted);font-size:13px;margin-top:4px}
     .info{margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:14px}
     .skills{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
@@ -154,12 +135,12 @@
       z-index:4000;
     }
 
-    /* Project Modal */
-    .project-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:3000}
-    .project-modal .content{background:var(--card);border-radius:16px;padding:20px;max-width:700px;width:92%;border:1px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
-    .project-modal h3{margin-bottom:8px}
-    .project-modal p{font-size:14px;color:var(--muted);line-height:1.6}
-    .project-modal .close{float:right;cursor:pointer;font-size:22px;color:var(--accent2);font-weight:700}
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:3000}
+    .modal .content{background:var(--card);border-radius:16px;padding:20px;max-width:700px;width:92%;border:1px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
+    .modal h3{margin-bottom:8px}
+    .modal p{font-size:14px;color:var(--muted);line-height:1.6}
+    .modal .close{float:right;cursor:pointer;font-size:22px;color:var(--accent2);font-weight:700}
 
     @media(max-width:900px){
       .container{grid-template-columns:1fr}
@@ -179,12 +160,10 @@
       <li><a href="#certs">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-
     <div style="display:flex;align-items:center;gap:12px">
       <div class="toggle" onclick="toggleTheme()">Toggle 🌙</div>
       <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
     </div>
-
     <div class="mobile-menu" id="mobileMenu">
       <a href="#about" onclick="toggleMenu()">About</a>
       <a href="#services" onclick="toggleMenu()">Services</a>
@@ -192,7 +171,6 @@
       <a href="#certs" onclick="toggleMenu()">Certificates</a>
       <a href="#contact" onclick="toggleMenu()">Contact</a>
     </div>
-
     <div id="progress"></div>
   </nav>
 
@@ -215,92 +193,75 @@
     <!-- Services -->
     <section class="left" id="services">
       <h2>Services</h2>
-      <div class="services">
-        <div class="service">
-          <h3>🎨 UI / UX Design</h3>
-          <p>Wireframes, prototypes, and design systems in Figma & Adobe XD. Accessible and intuitive digital experiences.</p>
-        </div>
-        <div class="service">
-          <h3>💻 Frontend Development</h3>
-          <p>Responsive websites and SPAs with HTML, CSS, and JavaScript. Fast, scalable, and API-integrated UIs.</p>
-        </div>
-        <div class="service">
-          <h3>🖥️ 3D Modeling</h3>
-          <p>High-quality 3D models for products, concepts, and interfaces using Blender and modern modeling tools.</p>
-        </div>
-        <div class="service">
-          <h3>🤖 Machine Learning</h3>
-          <p>ML solutions including data prep, model training, and predictive analytics with Python & scikit-learn.</p>
-        </div>
+      <div class="grid">
+        <div class="card"><h3>🎨 UI/UX Design</h3><span>Wireframes, prototypes, and design systems in Figma & Adobe XD.</span></div>
+        <div class="card"><h3>💻 Frontend Development</h3><span>Responsive websites with HTML, CSS, and JavaScript.</span></div>
+        <div class="card"><h3>🖥️ 3D Modeling</h3><span>High-quality 3D models for products and concepts.</span></div>
+        <div class="card"><h3>🤖 Machine Learning</h3><span>Predictive analytics & ML models with Python.</span></div>
       </div>
     </section>
 
     <!-- Projects -->
     <section class="left" id="projects">
       <h2>Projects</h2>
-      <h3>UI/UX</h3>
-      <div class="projects">
-        <div class="project" onclick="openProject('Cookly Landing Page','A landing page UI/UX case study for Cookly app.')"><span>Cookly Landing Page</span><span>UI/UX</span></div>
-        <div class="project" onclick="openProject('Cookly App','Full mobile app UI/UX design for recipe and cooking community.')"><span>Cookly App</span><span>UI/UX</span></div>
-        <div class="project" onclick="openProject('Shiprocket App','E-commerce shipping & logistics UI/UX redesign.')"><span>Shiprocket App</span><span>UI/UX</span></div>
-        <div class="project" onclick="openProject('Connectly App','Messaging platform concept with modern UI/UX.')"><span>Connectly App</span><span>UI/UX</span></div>
-        <div class="project" onclick="openProject('Univenue Case Study','Case study for event management app interface.')"><span>Univenue Case Study</span><span>UI/UX</span></div>
-        <div class="project" onclick="openProject('Nuroai App','AI assistant app UI/UX prototype.')"><span>Nuroai App</span><span>UI/UX</span></div>
+      <h3>🎨 UI/UX</h3>
+      <div class="grid">
+        <div class="card" onclick="openModal('Cookly Landing Page','Landing page UI/UX case study','https://www.figma.com/design/NsExSHvG5ADLY9KhVAfOjH/cooking-app')"><h3>Cookly Landing Page</h3><span>UI/UX</span></div>
+        <div class="card" onclick="openModal('Cookly App','Full mobile app UI/UX design','https://www.figma.com/design/NsExSHvG5ADLY9KhVAfOjH/cooking-app')"><h3>Cookly App</h3><span>UI/UX</span></div>
+        <div class="card" onclick="openModal('Shiprocket App','E-commerce shipping redesign','https://www.figma.com/design/uTo6scyY37o1Iefbt0AgjO/book-shipments')"><h3>Shiprocket App</h3><span>UI/UX</span></div>
+        <div class="card" onclick="openModal('Connectly App','Messaging platform concept','https://www.figma.com/design/8j2efiZTBcoKQZ82D76tlf/connectly')"><h3>Connectly App</h3><span>UI/UX</span></div>
+        <div class="card" onclick="openModal('Univenue Case Study','Event management app interface','https://www.figma.com/proto/G9kJsugXb5R909rwzWBe1J')"><h3>Univenue</h3><span>UI/UX</span></div>
+        <div class="card" onclick="openModal('Nuroai App','AI assistant app prototype','https://www.figma.com/design/0VW7E4Y3PRLjNCzFvwOCTc/Nuroai')"><h3>Nuroai App</h3><span>UI/UX</span></div>
       </div>
-
-      <h3 style="margin-top:14px">Machine Learning</h3>
-      <div class="projects">
-        <div class="project" onclick="openProject('Forest Classification','ML model to classify forest types.')"><span>Forest Classification</span><span>ML</span></div>
-        <div class="project" onclick="openProject('Loan Approval','ML system for loan approval predictions.')"><span>Loan Approval</span><span>ML</span></div>
-        <div class="project" onclick="openProject('Customer Segmentation','Clustering analysis for business customers.')"><span>Customer Segmentation</span><span>ML</span></div>
-        <div class="project" onclick="openProject('Student Score Prediction','Regression model for predicting student scores.')"><span>Student Score Prediction</span><span>ML</span></div>
-        <div class="project" onclick="openProject('GL App','Experimental ML-driven app.')"><span>GL App</span><span>ML</span></div>
+      <h3>🤖 Machine Learning</h3>
+      <div class="grid">
+        <div class="card" onclick="openModal('Forest Classification','ML model to classify forest types')"><h3>🌲 Forest Classification</h3><span>ML</span></div>
+        <div class="card" onclick="openModal('Loan Approval System','ML system for loan approval predictions')"><h3>💳 Loan Approval</h3><span>ML</span></div>
+        <div class="card" onclick="openModal('Customer Segmentation','Business customer clustering')"><h3>📊 Customer Segmentation</h3><span>ML</span></div>
+        <div class="card" onclick="openModal('Student Score Prediction','Regression model for predicting student scores')"><h3>📖 Student Score</h3><span>ML</span></div>
+        <div class="card" onclick="openModal('GL App','Experimental ML-driven app')"><h3>🧪 GL App</h3><span>ML</span></div>
       </div>
-
-      <h3 style="margin-top:14px">Frontend</h3>
-      <div class="projects">
-        <div class="project" onclick="openProject('Static Authentication WebApp','Frontend-only authentication demo site.')"><span>Static Authentication WebApp</span><span>Frontend</span></div>
-        <div class="project" onclick="openProject('Auth API Integration','Frontend with API-based authentication system.')"><span>Auth API Integration</span><span>Frontend</span></div>
+      <h3>💻 Frontend</h3>
+      <div class="grid">
+        <div class="card" onclick="openModal('Static Auth WebApp','Frontend-only authentication demo','https://github.com/San999-dev')"><h3>🔒 Static Auth</h3><span>Frontend</span></div>
+        <div class="card" onclick="openModal('Auth API Integration','Frontend with API-based authentication','https://github.com/San999-dev')"><h3>🔗 API Auth</h3><span>Frontend</span></div>
       </div>
     </section>
 
     <!-- Certificates -->
     <section class="left" id="certs">
       <h2>Certificates</h2>
-      <div class="certificates">
-        <div class="cert">UI/UX Designer <span>Developershub</span></div>
-        <div class="cert">Project Management <span>Certified</span></div>
-        <div class="cert">Cloud Computing <span>Certified</span></div>
-        <div class="cert">IT Support <span>Certified</span></div>
-        <div class="cert">HRM <span>Certified</span></div>
-        <div class="cert">Effective Leadership <span>Certified</span></div>
-        <div class="cert">AI Mastery <span>Certified</span></div>
-        <div class="cert">Marketing Manager <span>Certified</span></div>
-        <div class="cert">Executive Virtual Assistant <span>Certified</span></div>
+      <div class="grid">
+        <div class="card" onclick="openModal('UI/UX Designer','Completed at Developershub')"><h3>📜 UI/UX Designer</h3></div>
+        <div class="card" onclick="openModal('Project Management','Certified course completed')"><h3>📜 Project Management</h3></div>
+        <div class="card" onclick="openModal('Cloud Computing','Certified course completed')"><h3>☁️ Cloud Computing</h3></div>
+        <div class="card" onclick="openModal('IT Support','Certified course completed')"><h3>💻 IT Support</h3></div>
+        <div class="card" onclick="openModal('HRM','Certified course completed')"><h3>👥 HRM</h3></div>
+        <div class="card" onclick="openModal('Effective Leadership','Certified course completed')"><h3>⭐ Leadership</h3></div>
+        <div class="card" onclick="openModal('AI Mastery','Certified course completed')"><h3>🤖 AI Mastery</h3></div>
+        <div class="card" onclick="openModal('Marketing Manager','Certified course completed')"><h3>📈 Marketing</h3></div>
+        <div class="card" onclick="openModal('Executive VA','Certified course completed')"><h3>📝 Virtual Assistant</h3></div>
       </div>
     </section>
 
     <!-- Contact -->
     <aside class="right" id="contact">
       <div class="profile">
-        <div class="avatar">SE</div>
+        <div class="avatar"><img src="https://thumbs.dreamstime.com/b/programmer-developer-flat-style-illustration-white-background-isolated-character-ai-generated-335094652.jpg" alt="Profile"></div>
         <div class="meta">
           <div style="font-weight:600">Sana Ejaz</div>
           <div class="role">BS IT (2021–2025)</div>
           <div class="loc">Chakwal, Pakistan</div>
         </div>
       </div>
-
       <div class="info">
         <div><span>Languages</span><span>English, French, Urdu</span></div>
         <div><span>Contact</span><span>sanaejaz2708@gmail.com</span></div>
       </div>
-
       <div class="skills">
         <div class="skill">HTML/CSS</div><div class="skill">JavaScript</div><div class="skill">Figma</div>
         <div class="skill">Adobe XD</div><div class="skill">Machine Learning</div><div class="skill">SQL</div>
       </div>
-
       <div class="links">
         <a class="btn" href="https://drive.google.com/file/d/1Fnld7YN3QwzFzvlvfpb569xhASBTwxkb/view?usp=sharing" target="_blank">📄 View CV</a>
         <a class="btn" href="https://drive.google.com/uc?export=download&id=1Fnld7YN3QwzFzvlvfpb569xhASBTwxkb">⬇️ Download CV</a>
@@ -308,55 +269,32 @@
         <a class="btn" href="https://www.behance.net/sanaejaz10" target="_blank">Behance</a>
         <a class="btn" href="https://www.linkedin.com/in/sana-ejaz-18a170268" target="_blank">LinkedIn</a>
       </div>
-
-      <!-- Contact Form -->
       <form class="contact-form" id="contactForm">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="_replyto" placeholder="Your Email" required>
         <textarea name="message" rows="4" placeholder="Your Message..." required></textarea>
         <button type="submit">Send Message</button>
       </form>
-
-      <!-- Popup Message -->
       <div id="formPopup">Thank you for your message!</div>
-
       <footer>Portfolio • Updated Aug 2025</footer>
     </aside>
   </main>
 
-  <!-- Project Modal -->
-  <div class="project-modal" id="projectModal">
+  <!-- Modal -->
+  <div class="modal" id="modalBox">
     <div class="content">
-      <span class="close" onclick="closeProject()">&times;</span>
-      <h3 id="projTitle"></h3>
-      <p id="projDesc"></p>
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <a id="modalLink" class="btn" href="#" target="_blank" style="display:none;margin-top:10px">🔗 View More</a>
     </div>
   </div>
 
   <script>
-    // Theme toggle
     function toggleTheme(){ document.body.classList.toggle('light'); }
-
-    // Project modal
-    function openProject(title,desc){
-      document.getElementById('projTitle').innerText = title;
-      document.getElementById('projDesc').innerText = desc;
-      document.getElementById('projectModal').style.display = 'flex';
-    }
-    function closeProject(){ document.getElementById('projectModal').style.display = 'none'; }
-
-    // Intersection observer for reveal
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add('show');
-      });
-    },{threshold: .18});
-    document.querySelectorAll('.left,.right').forEach(el => observer.observe(el));
-
-    // Mobile menu toggle
     function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('show'); }
 
-    // Scroll progress bar
+    // Scroll progress
     window.addEventListener('scroll', ()=>{ 
       const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -364,34 +302,32 @@
       document.getElementById('progress').style.width = scrolled + '%';
     });
 
-    // Stars generation
-    const particleContainer = document.getElementById('particles');
-    for(let i=0;i<60;i++){
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random()*100 + 'vw';
-      star.style.top = Math.random()*100 + 'vh';
-      star.style.width = (2 + Math.random()*3) + 'px';
-      star.style.height = star.style.width;
-      star.style.opacity = 0.25 + Math.random()*0.9;
-      star.style.animationDuration = (8 + Math.random()*12) + 's';
-      star.style.animationDelay = (Math.random()*5) + 's';
-      particleContainer.appendChild(star);
+    // Intersection animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
+    },{threshold: .18});
+    document.querySelectorAll('.left,.right').forEach(el => observer.observe(el));
+
+    // Modal
+    function openModal(title,desc,link){
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDesc').innerText = desc;
+      const l = document.getElementById('modalLink');
+      if(link){ l.href=link; l.style.display='inline-block'; } else { l.style.display='none'; }
+      document.getElementById('modalBox').style.display = 'flex';
     }
+    function closeModal(){ document.getElementById('modalBox').style.display = 'none'; }
+    window.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+    window.addEventListener('click', e => { if(e.target === document.getElementById('modalBox')) closeModal(); });
 
-    // Close modal on ESC/click
-    window.addEventListener('keydown', e => { if(e.key === 'Escape') closeProject(); });
-    window.addEventListener('click', e => { if(e.target === document.getElementById('projectModal')) closeProject(); });
-
-    // Contact Form Submission
+    // Contact Form
     const form = document.getElementById('contactForm');
     const popup = document.getElementById('formPopup');
-
     form.addEventListener('submit', function(e){
-      e.preventDefault(); // prevent form submission
-      popup.style.display = 'block'; // show popup
-      form.reset(); // reset fields
-      setTimeout(() => { popup.style.display = 'none'; }, 3000); // hide after 3s
+      e.preventDefault(); 
+      popup.style.display = 'block'; 
+      form.reset(); 
+      setTimeout(() => { popup.style.display = 'none'; }, 3000);
     });
   </script>
 </body>
