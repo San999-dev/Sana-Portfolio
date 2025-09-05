@@ -44,18 +44,11 @@ Hi, I’m Sana Ejaz — an IT student, Frontend Developer, UI/UX Designer, and M
 
 I’m passionate about crafting seamless digital experiences and continuously exploring new technologies.
 
-📧 Contact: sanaejaz2708@gmail.com
-📬 Contact Me
+📧 Contact:
 
-📧 Email: sanaejaz2708@gmail.com
-
-💼 LinkedIn: Sana Ejaz
-
-🎨 Behance: @sanaejaz10
-
-💻 GitHub: San999-dev
+sanaejaz2708@gmail.com
 
 
-✉️ Email modal form
+
 
 ⚡ Smooth  and responsive design
