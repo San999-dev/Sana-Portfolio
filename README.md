@@ -3,7 +3,7 @@ The portfolio contains my personal portfolio website, built to showcase my skill
 
 🚀 Features
 
-🎨 Modern UI with animated aurora + twinkling stars background
+🎨 Modern UI 
 
 📌 Sticky navigation bar with mobile menu
 
@@ -45,9 +45,17 @@ Hi, I’m Sana Ejaz — an IT student, Frontend Developer, UI/UX Designer, and M
 I’m passionate about crafting seamless digital experiences and continuously exploring new technologies.
 
 📧 Contact: sanaejaz2708@gmail.com
+📬 Contact Me
 
+📧 Email: sanaejaz2708@gmail.com
+
+💼 LinkedIn: Sana Ejaz
+
+🎨 Behance: @sanaejaz10
+
+💻 GitHub: San999-dev
 
 
 ✉️ Email modal form
 
-⚡ Smooth animations and responsive design
+⚡ Smooth  and responsive design
